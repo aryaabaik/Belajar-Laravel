@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MyController;//controller harus di import/di panggil
-use App\Http\Controllers\PostController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -97,58 +95,15 @@ Route::get('status', function () {
 
 //tes model 
 Route::get('tes-model', function() {
-    $post = App\Models\Post::all();
-    return $post;
+    $model = App\Models\Kendaraan::all();
+    return $model;
 });
 
-Route::get('create-data', function(){
-    $post = App\Models\Post::create([
+Route::post('create-data-Kendaraan', function(){
+    $model = App\Models\Kendaraan::create([
 
-        'tittle' => 'Ini Arya 3',
-        'content' => 'Lorem Ipsum',
-        'stok' => 3
+        'Merk' => 'Yamaha',
+        'Jenis_Kendaraan' => 'Aerox 155'
     ]);
-    return redirect('tes-model');
+    return $model;
 });
-
-Route::get('show-data/{id}', function($id){
-
-    $data =  App\Models\Post::find($id);
-    return $data;
-});
-
-Route::get('edit-data/{id}', function($id){
-
-    $data = App\Models\Post::find($id);
-    $data->tittle = "Membangun Project dengan Laravel";
-    $data->save();
-    return $data;
-});
-
-Route::get('delete-data/{id}', function($id){
-
-    $data = App\Models\Post::find($id);
-    $data->delete();
-    
-    return redirect('tes-model');
-});
-
-Route::get('search/{cari}', function($query) {
-    
-    $data = App\Models\Post::where('tittle', 'like', '%' . $query . '%')->get();
-    return $data;
-});
-
-//pemanggilan url menggunakan controller
-
-Route::get('greeting', [MyController::class, 'Hello']);
-
-Route::get('student', [MyController::class, 'siswa']);
-
-
-
-Route::get('post', [PostController::class, 'index']);
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

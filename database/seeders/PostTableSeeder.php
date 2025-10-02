@@ -11,9 +11,9 @@ class PostTableSeeder extends Seeder
     public function run(): void
     {
         $post = [
-            ['tittle' => 'Belajar Laravel', 'content' => 'Lorem Ipsum'],
-            ['tittle' => 'Tips Belajar Laravel', 'content' => 'Lorem Ipsum'],
-            ['tittle' => 'Jadwal Latihna Workout Bulanan', 'content' => 'Lorem Ipsum'],
+            ['tittle' => 'Belajar Laravel', 'content' => 'Lorem Ipsum', 'stok' => 3],
+            ['tittle' => 'Tips Belajar Laravel', 'content' => 'Lorem Ipsum', 'stok' => 2],
+            ['tittle' => 'Jadwal Latihna Workout Bulanan', 'content' => 'Lorem Ipsum', 'stok' => 2],
         ];
         DB::table('post')->insert($post);
     }
