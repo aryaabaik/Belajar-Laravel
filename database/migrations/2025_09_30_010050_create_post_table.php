@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('tittle')->unique();
             $table->text('content');
-            $table->integer('stok');
             $table->timestamps();
         });
     }

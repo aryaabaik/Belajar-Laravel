@@ -45,10 +45,10 @@ Route::get('books/{judul}', function($a){
 });
 
 
-Route::get('post/{tittle}/{category}', function($a, $b){
-    //compact asosiatif
-    return view('post', ['judul'=>$a, 'cat'=>$b]);
-});
+// Route::get('post/{tittle}/{category}', function($a, $b){
+//     //compact asosiatif
+//     return view('post', ['judul'=>$a, 'cat'=>$b]);
+// });
 
 //Route Optional Parameter 
 // Ditandai Dengan ?
@@ -106,14 +106,13 @@ Route::get('create-data', function(){
 
         'tittle' => 'Ini Arya 3',
         'content' => 'Lorem Ipsum',
-        'stok' => 3
     ]);
     return redirect('tes-model');
 });
 
 Route::get('show-data/{id}', function($id){
 
-    $data =  App\Models\Post::find($id);
+    $data = Post::find($id);
     return $data;
 });
 
@@ -147,8 +146,18 @@ Route::get('student', [MyController::class, 'siswa']);
 
 
 
-Route::get('post', [PostController::class, 'index']);
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//post
+Route::get('post', [PostController::class, 'index'])->name('post.index');
+//tambah data post
+Route::get('post/create', [PostController::class, 'create'])->name('post.create');
+Route::post('post', [PostController::class, 'store'])->name('post.store');
+//edit data post
+Route::get('post/{id}/edit', [PostController::class, 'edit'])->name('post.edit');
+Route::put('post/{id}', [PostController::class, 'update'])->name('post.update');
+
+//delete data
+Route::delete('post/{id}', [PostController::class, 'destroy'])->name('post.delete');
