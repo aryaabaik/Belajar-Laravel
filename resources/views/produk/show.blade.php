@@ -1,29 +1,32 @@
 @extends('layouts.app')
+
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <fieldset>
-                <legend>Edit Data Post</legend>
-                <form action="{{ route('post.update', $post->id) }}" method="post">
-                    @csrf
-                    @method('PUT')
-                    <div class="mb-3">
-                        <label for="">Tittle</label>
-                        <input type="text" name="tittle" class="form-control" value="{{ $post->tittle }}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="">Content</label>
-                        <textarea name="content" class="form-control" required> {{ $post->content }} </textarea>
-                    </div>
-                    <div class="mb3">
-                        <button type="submit" class="btn btn-success">Simpan</button>
-                    </div>
-                </form>
-            </fieldset>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    Ini Diaa!!!
+                    <a href="{{ route('produk.index') }}" class="btn btn-sm btn-outline-primary">Kembali</a>
+                </div>
+
+                <div class="card-body">
+                    @if ($produk->image)
+                    <img src="{{ Storage::url($produk->image)  }}" class="w-100 rounded mb-3" alt="{{ $produk->nama }}">
+                    @else
+                    <img src="" class="w-100 rounded mb-3" alt="No Image">Gambar Tidak Ada
+                    @endif
+
+                    <h4 class="fw-bold">{{ $produk->nama }}</h4>
+                    <p class="mt-2 mb-1">Harga: <strong>Rp{{ number_format($produk->harga, 0, ',', '.') }}</strong></p>
+                    <p class="mt-2">{!! $produk->deskripsi !!}</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+
 <div class="container py-5">
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
         <div class="col-md-4 d-flex align-items-center">
@@ -50,3 +53,4 @@
 </div>
 
 @endsection
+

@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyController;//controller harus di import/di panggil
 use App\Http\Controllers\PostController;
+use  App\Http\Controllers\ProdukController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -159,5 +161,12 @@ Route::post('post', [PostController::class, 'store'])->name('post.store');
 Route::get('post/{id}/edit', [PostController::class, 'edit'])->name('post.edit');
 Route::put('post/{id}', [PostController::class, 'update'])->name('post.update');
 
+//show data
+Route::get('post/{id}', [PostController::class, 'show'])->name('post.show');
+
+
 //delete data
 Route::delete('post/{id}', [PostController::class, 'destroy'])->name('post.delete');
+
+//produk
+Route::resource('produk', App\Http\Controllers\ProdukController::class)->middleware('auth');

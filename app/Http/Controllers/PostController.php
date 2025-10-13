@@ -36,6 +36,14 @@ class PostController extends Controller
         return redirect()->route('post.index');
     }
 
+    public function show($id)
+    {
+        //mencari data post berdasarkan parameter id
+        $post = Post::findOrFail($id);
+
+        return view('post.show', compact('post'));
+    }
+
     public function edit($id)
     {
         //mencari data post berdasarkan parameter id
@@ -63,3 +71,4 @@ class PostController extends Controller
         return redirect()->route('post.index');
     }
  }
+
