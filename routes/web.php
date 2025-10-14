@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MyController;//controller harus di import/di panggil
 use App\Http\Controllers\PostController;
 use  App\Http\Controllers\ProdukController;
+use App\Http\Controllers\BiodataController;
+use App\Http\Controllers\RelasiController;
+use App\Models\Wali;
 
 
 Route::get('/', function () {
@@ -170,3 +173,26 @@ Route::delete('post/{id}', [PostController::class, 'destroy'])->name('post.delet
 
 //produk
 Route::resource('produk', App\Http\Controllers\ProdukController::class)->middleware('auth');
+
+// biodata
+
+
+Route::resource('biodata', BiodataController::class);
+
+//Relasi
+//onetoone
+Route::get('/one-to-one', [RelasiController::class, 'oneToOne']);
+
+Route::get('/wali-ke-mahasiswa', function(){
+    $wali = Wali::with('mahasiswa')->first();
+    return "{$wali->nama} adalah wali dari {$wali->mahasiswa->nama}";
+});
+//onetomany
+Route::get('/one-to-many', [RelasiController::class, 'oneToMany']);
+
+//Many To Many
+Route::get('/many-to-many', [RelasiController::class, 'manyToMany']);
+
+//eloquent
+
+Route::get('eloquent', [RelasiController::class, 'eloquent']);

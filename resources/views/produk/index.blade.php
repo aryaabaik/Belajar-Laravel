@@ -29,7 +29,7 @@
                             </thead>
                             <tbody>
                                 @php $no = 1; @endphp
-                                @forelse ($produk as $data)
+                                @forelse ($biodata as $data)
                                 <tr>
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $data->nama }}</td>
@@ -39,7 +39,7 @@
                                         <img src="{{Storage::url($data->image)}}" class="rounded" style="width: 150px">
 
                                     </td>
-                                    <td>
+                                    <td>aa
                                         <form action="{{ route('produk.destroy', $data->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')

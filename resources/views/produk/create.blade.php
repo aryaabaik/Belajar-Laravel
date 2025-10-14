@@ -56,7 +56,6 @@
                         </div>
 
                         <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
-                        <button type="reset" class="btn btn-sm btn-warning">Reset</button>
 
                     </form>
                 </div>

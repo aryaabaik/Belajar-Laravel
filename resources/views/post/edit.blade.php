@@ -1,52 +1,68 @@
 @extends('layouts.app')
+
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col">
-            <fieldset>
-                <legend>Edit Data Post</legend>
-                <form action="{{ route('post.update', $post->id) }}" method="post">
-                    @csrf
-                    @method('PUT')
-                    <div class="mb-3">
-                        <label for="">Tittle</label>
-                        <input type="text" name="tittle" class="form-control" value="{{ $post->tittle }}" required>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <div class="float-start">
+                        {{ __('Dashboard') }}
                     </div>
-                    <div class="mb-3">
-                        <label for="">Content</label>
-                        <textarea name="content" class="form-control" required> {{ $post->content }} </textarea>
+                    <div class="float-end">
+                        <a href="{{ route('produk.index') }}" class="btn btn-sm btn-outline-primary">Kembali</a>
                     </div>
-                    <div class="mb3">
-                        <button type="submit" class="btn btn-success">Simpan</button>
-                    </div>
-                </form>
-            </fieldset>
+                </div>
+
+                <div class="card-body">
+                    <form action="{{ route('produk.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="mb-3">
+                            <label class="form-label">Nama Produk</label>
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" placeholder="produk Name" required>
+                            @error('nama')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Harga Produk</label>
+                            <input type="number" class="form-control @error('harga') is-invalid @enderror" name="harga" value="{{ old('harga') }}" placeholder="Harga" required>
+                            @error('harga')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Deskripsi</label>
+                            <textarea class="form-control" class="form-control @error('deskirpsi') is-invalid @enderror" name="deskripsi" value="{{ old('deskirpsi') }}" rows="3" placeholder="deskirpsi" required></textarea>
+                            @error('deskirpsi')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Image</label>
+                            <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" required></input>
+                            @error('image')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
+                        <button type="reset" class="btn btn-sm btn-warning">Reset</button>
+
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<div class="container py-5">
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <div class="col-md-4 d-flex align-items-center">
-            <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                <svg class="bi" width="30" height="24">
-                    <use xlink:href="#bootstrap"></use>
-                </svg>
-            </a>
-            <span class="text-muted">Arya Adhitya XI RPL 3 </span>
-        </div>
-
-        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
-                        <use xlink:href="#twitter"></use>
-                    </svg></a></li>
-            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
-                        <use xlink:href="#instagram"></use>
-                    </svg></a></li>
-            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
-                        <use xlink:href="#facebook"></use>
-                    </svg></a></li>
-        </ul>
-    </footer>
-</div>
-
 @endsection
+
