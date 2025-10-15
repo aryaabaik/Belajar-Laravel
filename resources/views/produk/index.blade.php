@@ -15,8 +15,8 @@
                 </div>
 
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table">
+                    <div class="table-responsive bg-dark">
+                        <table class="table ">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -29,7 +29,7 @@
                             </thead>
                             <tbody>
                                 @php $no = 1; @endphp
-                                @forelse ($biodata as $data)
+                                @forelse ($produk as $data)
                                 <tr>
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $data->nama }}</td>
@@ -39,7 +39,7 @@
                                         <img src="{{Storage::url($data->image)}}" class="rounded" style="width: 150px">
 
                                     </td>
-                                    <td>aa
+                                    <td>
                                         <form action="{{ route('produk.destroy', $data->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
@@ -58,7 +58,7 @@
                                 @endforelse
                             </tbody>
                         </table>
-                        {!! $produk->withQueryString()->links('pagination::bootstrap-4') !!}
+                        {!! $dosen->withQueryString()->links('pagination::bootstrap-4') !!}
                     </div>
                 </div>
             </div>

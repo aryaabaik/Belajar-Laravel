@@ -6,7 +6,11 @@ use App\Http\Controllers\PostController;
 use  App\Http\Controllers\ProdukController;
 use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\RelasiController;
+use  App\Http\Controllers\DosenController;
+use  App\Http\Controllers\HobiController;
 use App\Models\Wali;
+use App\Models\Hobi;
+
 
 
 Route::get('/', function () {
@@ -196,3 +200,13 @@ Route::get('/many-to-many', [RelasiController::class, 'manyToMany']);
 //eloquent
 
 Route::get('eloquent', [RelasiController::class, 'eloquent']);
+
+//dosen
+Route::resource('dosen', DosenController::class)->middleware('auth');
+
+//Hobi
+Route::resource('hobi', HobiController::class)->middleware('auth');
+
+
+
+
