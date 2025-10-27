@@ -1,0 +1,170 @@
+/* 🚀 Modern CRUD Style by ChatGPT */
+
+/* Font & Background */
+body {
+    font-family: 'Inter', 'Poppins', sans-serif;
+    background: linear-gradient(120deg, #eef3ff, #ffffff);
+    color: #2b2b2b;
+    padding: 40px;
+    min-height: 100vh;
+}
+
+/* Container */
+.container {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    padding: 35px 40px;
+    max-width: 1000px;
+    margin: auto;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Judul */
+h1,
+h2 {
+    color: #3b5bdb;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 0.5px;
+}
+
+/* Tombol utama */
+.btn {
+    border: none;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #3b5bdb, #5468ff);
+    color: #fff;
+    box-shadow: 0 3px 10px rgba(59, 91, 219, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #2f4fd3, #465aff);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(59, 91, 219, 0.45);
+}
+
+/* Tombol edit dan hapus */
+.btn-edit {
+    background: #74c0fc;
+    color: #fff;
+}
+
+.btn-edit:hover {
+    background: #4dabf7;
+    transform: scale(1.05);
+}
+
+.btn-danger {
+    background: #ff6b6b;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background: #fa5252;
+    transform: scale(1.05);
+}
+
+/* Header tabel dan tombol atas */
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    background: #f8faff;
+    padding: 14px 20px;
+    border-radius: 12px;
+    border: 1px solid #edf1ff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+/* Tabel */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.table th {
+    background: #f0f3ff;
+    color: #3b5bdb;
+    padding: 14px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #dee2f7;
+}
+
+.table td {
+    padding: 14px;
+    border-bottom: 1px solid #f2f2f2;
+    vertical-align: middle;
+}
+
+.table tbody tr:hover {
+    background: #f9faff;
+    transition: 0.2s ease;
+}
+
+/* Animasi */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Pagination modern */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    gap: 8px;
+}
+
+.pagination a,
+.pagination span {
+    color: #3b5bdb;
+    border: 1px solid #cdd4ff;
+    padding: 6px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.pagination a:hover {
+    background-color: #3b5bdb;
+    color: #fff;
+}
+
+/* Footer */
+.footer {
+    margin-top: 40px;
+    text-align: center;
+    color: #8c8c8c;
+    font-size: 0.9rem;
+}
+
+.footer::after {
+    content: "✨ CRUD Modern by ChatGPT ✨";
+    display: block;
+    margin-top: 8px;
+    color: #3b5bdb;
+    font-weight: 500;
+}

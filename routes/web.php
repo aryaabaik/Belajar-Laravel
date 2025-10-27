@@ -8,6 +8,7 @@ use App\Http\Controllers\BiodataController;
 use App\Http\Controllers\RelasiController;
 use  App\Http\Controllers\DosenController;
 use  App\Http\Controllers\HobiController;
+use App\Http\Controllers\KucingController;
 use App\Models\Wali;
 use App\Models\Hobi;
 
@@ -210,3 +211,12 @@ Route::resource('hobi', HobiController::class)->middleware('auth');
 
 
 
+
+Route::resource('kucing', KucingController::class);
+
+
+//CRUD One To Many 
+Route::resource('mahasiswa', App\Http\Controllers\MahasiswaController::class);
+
+//CRUD Wali
+Route::resource('wali', App\Http\Controllers\WaliController::class);
