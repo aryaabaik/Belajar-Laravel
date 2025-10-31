@@ -2,96 +2,183 @@
 
 @section('content')
 <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    }
+
     body {
-        background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-        min-height: 100vh;
-        font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f8fbff, #e6f0ff, #f3e8ff);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    opacity: 0;
+    animation: fadeInPage 1s ease forwards;
+    }
+
+    /* Animasi masuk seluruh halaman */
+    @keyframes fadeInPage {
+    from {
+    opacity: 0;
+    transform: scale(0.98);
+    filter: blur(5px);
+    }
+    to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+    }
     }
 
     .container {
-        margin-top: 50px;
-        margin-bottom: 50px;
+    margin-top: 80px;
+    animation: slideUp 1s ease-out;
     }
 
+    @keyframes slideUp {
+    0% {
+    opacity: 0;
+    transform: translateY(30px);
+    }
+    100% {
+    opacity: 1;
+    transform: translateY(0);
+    }
+    }
+
+    /* === CARD === */
     .card {
-        border: none;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-        background: #fff;
-        overflow: hidden;
-        transition: all 0.3s ease-in-out;
+    border: none;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 30px rgba(0, 115, 255, 0.1);
+    overflow: hidden;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: cardPopUp 0.8s ease forwards;
+    animation-delay: 0.4s;
+    }
+
+    @keyframes cardPopUp {
+    from {
+    opacity: 0;
+    transform: translateY(25px);
+    }
+    to {
+    opacity: 1;
+    transform: translateY(0);
+    }
     }
 
     .card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0, 115, 255, 0.25);
+    transition: all 0.4s ease;
     }
 
+    /* === HEADER === */
     .card-header {
-        background: linear-gradient(90deg, #007bff, #00bfff);
-        color: white;
-        font-weight: 600;
-        font-size: 1.1rem;
-        padding: 15px 25px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    background: linear-gradient(90deg, #4facfe, #00f2fe);
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding: 15px 20px;
+    border: none;
+    letter-spacing: 0.5px;
+    text-shadow: 0 1px 5px rgba(255, 255, 255, 0.6);
     }
 
+    .card-header .btn-outline-primary {
+    border-color: #fff;
+    color: #fff;
+    transition: all 0.3s ease;
+    }
+
+    .card-header .btn-outline-primary:hover {
+    background-color: #fff;
+    color: #4facfe;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    }
+
+    /* === ISI CARD === */
     .card-body {
-        padding: 30px;
+    padding: 30px;
+    opacity: 0;
+    animation: fadeUp 1s ease-in-out 0.6s forwards;
     }
 
-    .card-body h4 {
-        font-weight: 700;
-        color: #333;
+    @keyframes fadeUp {
+    from {
+    opacity: 0;
+    transform: translateY(15px);
+    }
+    to {
+    opacity: 1;
+    transform: translateY(0);
+    }
+    }
+
+    .card-body h5 {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #007bff;
+    margin-bottom: 15px;
     }
 
     .card-body p {
-        color: #555;
-        font-size: 16px;
-        margin-top: 10px;
+    color: #444;
+    font-size: 15px;
+    margin-bottom: 10px;
     }
 
-    .btn-outline-primary {
-        border-radius: 10px;
-        transition: 0.3s;
+    .card-body ul {
+    margin-left: 25px;
+    color: #555;
     }
 
-    .btn-outline-primary:hover {
-        background-color: #fff;
-        color: #007bff;
-        transform: scale(1.05);
-    }
-
-    .info-box {
-        background: #f9fbff;
-        border-radius: 12px;
-        padding: 20px;
-        border-left: 5px solid #007bff;
-        margin-top: 20px;
-    }
-
-    .info-label {
-        font-weight: 600;
-        color: #007bff;
-        margin-bottom: 5px;
-    }
-
-    .info-value {
-        font-size: 17px;
-        color: #333;
-    }
-
+    /* === FOOTER === */
     footer {
-        text-align: center;
-        color: #888;
-        margin-top: 40px;
-        font-size: 14px;
+    margin-top: auto;
+    text-align: center;
+    padding: 20px;
+    opacity: 0;
+    animation: footerAppear 1s ease-in-out 1s forwards;
     }
+
+    @keyframes footerAppear {
+    from {
+    opacity: 0;
+    transform: translateY(20px);
+    }
+    to {
+    opacity: 1;
+    transform: translateY(0);
+    }
+    }
+
+    footer span {
+    font-weight: 500;
+    color: #333;
+    }
+
+    footer .nav a {
+    color: #666;
+    transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    footer .nav a:hover {
+    color: #007bff;
+    transform: scale(1.1);
+    }
+
 
 </style>
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -103,9 +190,18 @@
 
                 <div class="card-body">
 
-                    <h4 class="fw-bold">{{ $mahasiswa->nama }}</h4>
-                    <p class="mt-2 mb-1">NIM: <strong>{{$mahasiswa->nim}}</strong></p>
-                    <p><strong>Dosen Pembimbing:</strong> {{ $mahasiswa->dosen->nama }}</p>
+                    <h5><strong>Nama Mahasiswa : {{ $mahasiswa->nama }}</strong></h5>
+                    <p><strong>NIM : {{ $mahasiswa->nim }}</strong></p>
+                    <p><strong>Dosen Pembimbing : {{ $mahasiswa->dosen->nama }}</strong> </p>
+                    <p><strong>Nama Wali : {{ $mahasiswa->wali->nama ?? '' }}</strong> </p>
+                    <p><strong>Hobi     :
+                        <ul>
+                        @foreach($mahasiswa->hobis as $hobi)
+                            <li>{{ $hobi->nama_hobi }}</li>
+                        @endforeach
+                        </ul>
+                    </strong>
+                    </p>
                 </div>
             </div>
         </div>

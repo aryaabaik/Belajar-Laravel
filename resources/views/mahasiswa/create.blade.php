@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+
 <div class="container">
     <div class="row">
         <div class="col">
@@ -27,6 +28,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
+                            <label for="">Dosen Pembimbing</label>
                             <select name="id_dosen" class="form-control @error('id_dosen') is-invalid @enderror" id="">
                                 @foreach ($dosen as $data)
                                 <option value="{{ $data->id }}"> {{ $data->nama }} </option>
@@ -39,6 +41,14 @@
                             @enderror
                         </div>
                         <div class="mb-3">
+                             <label for="">Hobi Mahasiswa</label>
+                            <select name="hobi[]" id="" class="form-control js-multiple" multiple>
+                                @foreach ($hobi as $data)
+                                    <option value="{{ $data->id }}">{{$data->nama_hobi}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <button type="submit" class="btn btn-block btn primary">Kirim</button>
                         </div>
                     </form>
@@ -47,4 +57,5 @@
         </div>
     </div>
 </div>
+
 @endsection

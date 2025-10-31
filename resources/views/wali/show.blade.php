@@ -3,7 +3,8 @@
 @section('content')
 <style>
     body {
-        background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+        background: linear-gradient(135deg, #ffffffff 0%, #5e5e5eff 100%);
+        animation: moveGradient 6s ease infinite;
         min-height: 100vh;
         font-family: 'Poppins', sans-serif;
     }
@@ -28,7 +29,8 @@
     }
 
     .card-header {
-        background: linear-gradient(90deg, #007bff, #00bfff);
+        background: linear-gradient(90deg, #007bff, #67d9ffff);
+        animation: moveGradient 6s ease infinite;
         color: white;
         font-weight: 600;
         font-size: 1.1rem;
