@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<style>
+{{-- <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
     body {
@@ -103,55 +103,56 @@
         }
     }
 
-</style>
+</style> --}}
 
 
 <div class="container">
     <div class="row">
         <div class="col">
             <div class="card">
-                <div class="card-header">Tambah Data Mahasiswa</div>
+                <div class="card-header">Tambah Data Transaksi</div>
                 <div class="card-body">
-                    <form action="{{ route('mahasiswa.store') }}" method="post">
+                    <form action="{{ route('transaksi.store') }}" method="post">
                         @csrf
                         <div class="mb-3">
-                            <label for="">Nama Mahasiswa</label>
-                            <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror">
-                            @error('nama')
+                            <label for="">Kode Transaksi</label>
+                            <input type="text" name="kode_transaksi" class="form-control @error('kode_transaksi') is-invalid @enderror">
+                            @error('kode_transaksi')
                             <span class="invalid-feedback" role="alert">
                                 <strong> {{ $message }} </strong>
                             </span>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="">Nomor Induk Mahasiswa</label>
-                            <input type="text" name="nim" class="form-control @error('nim') is-invalid  @enderror">
-                            @error('nama')
+                            <label for="">Tanggal Transaksi</label>
+                            <input type="date" name="tanggal" class="form-control @error('tanggal') is-invalid  @enderror">
+                            @error('tanggal')
                             <span class="invalid-feedback" role="alert">
                                 <strong> {{ $message }} </strong>
                             </span>
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="">Dosen Pembimbing</label>
-                            <select name="id_dosen" class="form-control @error('id_dosen') is-invalid @enderror" id="">
-                                @foreach ($dosen as $data)
-                                <option value="{{ $data->id }}"> {{ $data->nama }} </option>
+                            <label for="">Pelanggan </label>
+                            <select name="id_pelanggan" class="form-control @error('id_pelanggan') is-invalid @enderror" id="">
+                                @foreach ($pelanggans as $data)
+                                <option value="{{ $data->id }}"> {{ $data->nama ?? '' }} </option>
                                 @endforeach
                             </select>
-                            @error('id_dosen')
+                            @error('id_pelanggan')
                             <span class="invalid-feedback" role="alert">
                                 <strong> {{ $message }} </strong>
                             </span>
                             @enderror
                         </div>
                         <div class="mb-3">
-                             <label for="">Hobi Mahasiswa</label>
-                            <select name="hobi[]" id="" class="form-control js-multiple" multiple>
-                                @foreach ($hobi as $data)
-                                    <option value="{{ $data->id }}">{{$data->nama_hobi}}</option>
-                                @endforeach
-                            </select>
+                            <label for="">Total Harga</label>
+                            <input type="text" name="total_harga" class="form-control @error('total_harga') is-invalid @enderror">
+                            @error('total_harga')
+                            <span class="invalid-feedback" role="alert">
+                                <strong> {{ $message }} </strong>
+                            </span>
+                            @enderror
                         </div>
                         <div class="mb-3">
                             <button type="submit" class="btn btn-block btn primary">Kirim</button>

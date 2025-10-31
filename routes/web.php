@@ -220,3 +220,12 @@ Route::resource('mahasiswa', App\Http\Controllers\MahasiswaController::class);
 
 //CRUD Wali
 Route::resource('wali', App\Http\Controllers\WaliController::class);
+
+//CRUD Pelanggan
+Route::resource('pelanggan', App\Http\Controllers\PelangganController::class);
+
+//CRUD Prodak
+Route::resource('prodak', App\Http\Controllers\ProdakController::class)->middleware('auth');
+
+//CRUD Transaksi
+Route::resource('transaksi', App\Http\Controllers\TransaksiController::class)->middleware('auth');

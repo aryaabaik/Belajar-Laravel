@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
+{{-- <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
 body {
@@ -126,7 +126,7 @@ to { opacity: 1; }
 
 
 
-</style>
+</style> --}}
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
@@ -136,7 +136,7 @@ to { opacity: 1; }
                         Dosen
                     </div>
                     <div class="float-end">
-                        <a href="{{ route('mahasiswa.create') }}" class="btn btn-sm btn-outline-primary">Tambah Data</a>
+                        <a href="{{ route('transaksi.create') }}" class="btn btn-sm btn-outline-primary">Tambah Data</a>
                     </div>
                 </div>
 
@@ -146,25 +146,27 @@ to { opacity: 1; }
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Daftar Nama Mahasiswa</th>
-                                    <th>Nim</th>
-                                    <th>Nama Dosen</th>
+                                    <th>Kode Transaksi</th>
+                                    <th>Tanggal Transaksi</th>
+                                    <th>Pelanggan</th>
+                                    <th>Total Harga</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php $no = 1; @endphp
-                                @forelse ($mahasiswas as $data)
+                                @forelse ($transaksis as $data)
                                 <tr>
                                     <td>{{ $no++ }}</td>
-                                    <td>{{ $data->nama }}</td>
-                                    <td>{{ $data->nim }}</td>
-                                    <td>{{ $data->dosen->nama }}</td>
+                                    <td>{{ $data->kode_transaksi }}</td>
+                                    <td>{{ $data->tanggal }}</td>
+                                    <td>{{ $data->pelanggans->nama ?? '' }}</td>
+                                    <td>{{ $data->total_harga }}</td>
                                     <td>
-                                        <form action="{{ route('mahasiswa.destroy', $data->id) }}" method="POST">
+                                        <form action="{{ route('transaksi.destroy', $data->id) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <a href="{{ route('mahasiswa.show', $data->id) }}" class="btn btn-sm btn-outline-dark">Show</a> |
-                                            <a href="{{ route('mahasiswa.edit', $data->id) }}" class="btn btn-sm btn-outline-success">Edit</a> |
+                                            <a href="{{ route('transaksi.show', $data->id) }}" class="btn btn-sm btn-outline-dark">Show</a> |
+                                            <a href="{{ route('transaksi.edit', $data->id) }}" class="btn btn-sm btn-outline-success">Edit</a> |
                                             <button type="submit" onclick="return confirm('Are You Sure ?');" class="btn btn-sm btn-outline-danger">Delete</button>
                                         </form>
                                     </td>

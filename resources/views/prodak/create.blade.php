@@ -1,28 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
                     <div class="float-start">
-                        {{ __('Dashboard') }}
+                    Tambahkan Data Produk
                     </div>
                     <div class="float-end">
-                        <a href="{{ route('produk.index') }}" class="btn btn-sm btn-outline-primary">Kembali</a>
+                        <a href="{{ route('prodak.index') }}" class="btn btn-sm btn-outline-primary">Kembali</a>
                     </div>
                 </div>
 
                 <div class="card-body">
-                    <form action="{{ route('produk.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('prodak.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label class="form-label">Nama Produk</label>
-                            <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama" value="{{ old('nama') }}" placeholder="produk Name" required>
-                            @error('nama')
+                            <input type="text" class="form-control @error('nama_prodak') is-invalid @enderror" name="nama_prodak" value="{{ old('nama_prodak') }}" placeholder="produk Name" required>
+                            @error('nama_prodak')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -38,19 +36,9 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Deskripsi</label>
-                            <textarea class="form-control" class="form-control @error('deskirpsi') is-invalid @enderror" name="deskripsi" value="{{ old('deskirpsi') }}" rows="3" placeholder="deskirpsi" required></textarea>
-                            @error('deskirpsi')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Image</label>
-                            <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" required></input>
-                            @error('image')
+                            <label class="form-label">Stok Produk</label>
+                            <input type="number" class="form-control @error('stok') is-invalid @enderror" name="stok" value="{{ old('stok') }}" placeholder="stok" required>  
+                            @error('stok')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -58,7 +46,6 @@
                         </div>
 
                         <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
-                        <button type="reset" class="btn btn-sm btn-warning">Reset</button>
 
                     </form>
                 </div>
