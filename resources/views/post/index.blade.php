@@ -2,93 +2,70 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="float-start">
-                        Produk
-                    </div>
-                    <div class="float-end">
-                        <a href="" class="btn btn-sm btn-outline-primary">Tambah Data</a>
-                    </div>
-                </div>
-
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Nama Produk</th>
-                                    <th>Harga</th>
-                                    <th>Deskripsi</th>
-                                    <th>Image</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php $no = 1; @endphp
-                                @forelse ($biodata as $data)
-                                <tr>
-                                    <td>{{ $no++ }}</td>
-                                    <td>{{ $data->nama }}</td>
-                                    <td>{!! $data->harga !!}</td>
-                                    <td>{{ $data->deskripsi}}</td>
-                                    <td>
-                                        <img src="{{Storage::url($data->image)}}" class="rounded" style="width: 150px">
-
-                                    </td>
-                                    <td>
-                                        <form action="{{ route('produk.destroy', $data->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <a href="{{ route('produk.show', $data->id) }}" class="btn btn-sm btn-outline-dark">Show</a> |
-                                            <a href="{{ route('produk.edit', $data->id) }}" class="btn btn-sm btn-outline-success">Edit</a> |
-                                            <button type="submit" onclick="return confirm('Are You Sure ?');" class="btn btn-sm btn-outline-danger">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @empty
-                                <tr>
-                                    <td colspan="5" class="text-center">
-                                        Data data belum Tersedia.
-                                    </td>
-                                </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                        {!! $produk->withQueryString()->links('pagination::bootstrap-4') !!}
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3>Daftar Transakasi</h3>
+        <a href="{{ route('transaksi.create') }}" class="btn btn-primary">Buat Transaksi Baru</a>
     </div>
-</div>
-<div class="container py-5">
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <div class="col-md-4 d-flex align-items-center">
-            <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                <svg class="bi" width="30" height="24">
-                    <use xlink:href="#bootstrap"></use>
-                </svg>
-            </a>
-            <span class="text-muted">Arya Adhitya XI RPL 3 </span>
+
+    {{-- {{ notifikasi sukses }} --}}
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
         </div>
+    @endif
 
-        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
-                        <use xlink:href="#twitter"></use>
-                    </svg></a></li>
-            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
-                        <use xlink:href="#instagram"></use>
-                    </svg></a></li>
-            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
-                        <use xlink:href="#facebook"></use>
-                    </svg></a></li>
-        </ul>
-    </footer>
+    {{-- {{ notifikasi eror }} --}}
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach($errors->all() as $err)
+                    <li>{{ $err }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    @if($transaksi->count() > 0)
+        <div class="table-responsive">
+          <table class="table table-bordered align-middle text-center">
+              <thead class="table-light">
+                  <tr>
+                      <th>No</th>
+                      <th>Kode Transaksi</th>
+                      <th>Tanggal</th>
+                        <th>Nama Pelanggan</th>
+                        <th>Total Harga</th>
+                        <th>Aksi</th>
+                  </tr>
+              </thead>
+              <tbody>
+                 @foreach($transaksis as $no => $trx)
+                  <tr>
+                      <td>{{ $no + 1 }}</td>
+                      <td>{{ $trx->kode_transaksi }}</td>
+                      <td>{{ Carbon\Carbon::parse($trx->tanggal)->format('d M Y, H:i') }}</td>
+                      <td>{{ $trx->nama_pelanggan }}</td>
+                      <td>Rp.{{ number_format($trx->total_harga, 0, ',', '.') }}</td>
+                      <td>
+                        <a href="{{ route('transaksi.show', $trx->id) }}"
+                            class="btn btn-outline-warning btn-sm">Show</a>
+                        <a href="{{ route('transaksi.edit', $trx->id) }}"
+                            class="btn btn-outline-success btn-sm">Edit</a>
+                          <form action="{{ route('transaksi.destroy', $trx->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin mau hapus transaksi ini?')">
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" class="btn btn-outline-danger btn-sm">Hapus</button>
+                          </form>
+                      </td>
+                 @endforeach
+                </tbody>
+          </table>
+        </div>
+        @else
+        <div class="alert alert-info">
+            Data transaksi belum tersedia.
+        </div>
+    @endif
 </div>
-
 @endsection
 

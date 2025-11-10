@@ -1,73 +1,66 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MyController;//controller harus di import/di panggil
-use App\Http\Controllers\PostController;
-use  App\Http\Controllers\ProdukController;
 use App\Http\Controllers\BiodataController;
-use App\Http\Controllers\RelasiController;
-use  App\Http\Controllers\DosenController;
-use  App\Http\Controllers\HobiController;
+use App\Http\Controllers\DosenController; //controller harus di import/di panggil
+use App\Http\Controllers\HobiController;
 use App\Http\Controllers\KucingController;
+use App\Http\Controllers\MyController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\RelasiController;
 use App\Models\Wali;
-use App\Models\Hobi;
-
-
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-//basic 
-Route::get('about', function(){
-return '<h1>Hallo </h1>' . 
-'<br> Selamat Datang Di Perpustakaan Digital'; 
+//basic
+Route::get('about', function () {
+    return '<h1>Hallo </h1>' .
+        '<br> Selamat Datang Di Perpustakaan Digital';
 });
 
-
 //perkenalan
-Route::get('hai', function(){
-return '<h1>Perkenalan </h1>' . 
-'<br> Nama Saya Arya Adhitya.' . '<br>Saya Kelas XI RPL 3' . '<br>Saya Sekolah Di SMK ASSALAAM BANDUNG'
- . '<br>Alamat Saya Jln.Terusan Cibaduyut GG.Situtarate'; 
+Route::get('hai', function () {
+    return '<h1>Perkenalan </h1>' .
+        '<br> Nama Saya Arya Adhitya.' . '<br>Saya Kelas XI RPL 3' . '<br>Saya Sekolah Di SMK ASSALAAM BANDUNG'
+        . '<br>Alamat Saya Jln.Terusan Cibaduyut GG.Situtarate';
 });
 
 //buku
-Route::get('buku', function(){
-return view('buku'); 
+Route::get('buku', function () {
+    return view('buku');
 });
 
+Route::get('menu', function () {
+    $data = [
+        ['nama_makanan' => 'Bala-Bala', 'harga' => 1000, 'jumlah' => 10],
+        ['nama_makanan' => 'Gehu Pedas', 'harga' => 2000, 'jumlah' => 15],
+        ['nama_makanan' => 'Cireng Isi Ayam', 'harga' => 2500, 'jumlah' => 5],
+    ];
+    $resto = "Resto MPL - Makanan Penuh Lemak";
 
-Route::get('menu', function(){
- $data = [
-    ['nama_makanan'=>'Bala-Bala', 'harga'=>1000, 'jumlah'=>10],
-    ['nama_makanan'=>'Gehu Pedas', 'harga'=>2000, 'jumlah'=>15],
-    ['nama_makanan'=>'Cireng Isi Ayam', 'harga'=>2500, 'jumlah'=>5],
- ];
- $resto = "Resto MPL - Makanan Penuh Lemak";
-
- return view('menu', compact('data', 'resto'));
+    return view('menu', compact('data', 'resto'));
 });
 
 //route Parameter (Nilai)
-Route::get('books/{judul}', function($a){
-    return '<h2>Judul Buku : '  . $a;
+Route::get('books/{judul}', function ($a) {
+    return '<h2>Judul Buku : ' . $a;
 });
-
 
 // Route::get('post/{tittle}/{category}', function($a, $b){
 //     //compact asosiatif
 //     return view('post', ['judul'=>$a, 'cat'=>$b]);
 // });
 
-//Route Optional Parameter 
+//Route Optional Parameter
 // Ditandai Dengan ?
-Route::get('profile/{nama?}', function($a = "guest"){
+Route::get('profile/{nama?}', function ($a = "guest") {
     return 'Halo Nama Saya' . $a;
 });
 
-Route::get('order/{item?}', function($a = "nasi"){
-        return view('order', compact('a'));
+Route::get('order/{item?}', function ($a = "nasi") {
+    return view('order', compact('a'));
 });
 
 //Tugas Latihan
@@ -85,13 +78,13 @@ Route::get('toko', function () {
 });
 
 //2.
-Route::get('kelulusan/{nama?}/{mapel?}/{lulus?}', function($a = "Tidak Ada Nilai", $b = "Tidak Ada Nilai", $c = "Tidak Ada Nilai") {
+Route::get('kelulusan/{nama?}/{mapel?}/{lulus?}', function ($a = "Tidak Ada Nilai", $b = "Tidak Ada Nilai", $c = "Tidak Ada Nilai") {
     return view('kelulusan', compact('a', 'b', 'c'));
 });
 
-//3. 
-Route::get('grading/{nama?}/{nilai?}', function($a = "Tidak Ada Nilai", $b = "Tidak Ada Nilai") {
-    return view('grading', compact('a', 'b',));
+//3.
+Route::get('grading/{nama?}/{nilai?}', function ($a = "Tidak Ada Nilai", $b = "Tidak Ada Nilai") {
+    return view('grading', compact('a', 'b', ));
 });
 
 //4.
@@ -105,45 +98,45 @@ Route::get('status', function () {
     return view('status', compact('data'));
 });
 
-//tes model 
-Route::get('tes-model', function() {
+//tes model
+Route::get('tes-model', function () {
     $post = App\Models\Post::all();
     return $post;
 });
 
-Route::get('create-data', function(){
+Route::get('create-data', function () {
     $post = App\Models\Post::create([
 
-        'tittle' => 'Ini Arya 3',
+        'tittle'  => 'Ini Arya 3',
         'content' => 'Lorem Ipsum',
     ]);
     return redirect('tes-model');
 });
 
-Route::get('show-data/{id}', function($id){
+Route::get('show-data/{id}', function ($id) {
 
     $data = Post::find($id);
     return $data;
 });
 
-Route::get('edit-data/{id}', function($id){
+Route::get('edit-data/{id}', function ($id) {
 
-    $data = App\Models\Post::find($id);
+    $data         = App\Models\Post::find($id);
     $data->tittle = "Membangun Project dengan Laravel";
     $data->save();
     return $data;
 });
 
-Route::get('delete-data/{id}', function($id){
+Route::get('delete-data/{id}', function ($id) {
 
     $data = App\Models\Post::find($id);
     $data->delete();
-    
+
     return redirect('tes-model');
 });
 
-Route::get('search/{cari}', function($query) {
-    
+Route::get('search/{cari}', function ($query) {
+
     $data = App\Models\Post::where('tittle', 'like', '%' . $query . '%')->get();
     return $data;
 });
@@ -153,8 +146,6 @@ Route::get('search/{cari}', function($query) {
 Route::get('greeting', [MyController::class, 'Hello']);
 
 Route::get('student', [MyController::class, 'siswa']);
-
-
 
 Auth::routes();
 
@@ -172,7 +163,6 @@ Route::put('post/{id}', [PostController::class, 'update'])->name('post.update');
 //show data
 Route::get('post/{id}', [PostController::class, 'show'])->name('post.show');
 
-
 //delete data
 Route::delete('post/{id}', [PostController::class, 'destroy'])->name('post.delete');
 
@@ -181,14 +171,13 @@ Route::resource('produk', App\Http\Controllers\ProdukController::class)->middlew
 
 // biodata
 
-
 Route::resource('biodata', BiodataController::class);
 
 //Relasi
 //onetoone
 Route::get('/one-to-one', [RelasiController::class, 'oneToOne']);
 
-Route::get('/wali-ke-mahasiswa', function(){
+Route::get('/wali-ke-mahasiswa', function () {
     $wali = Wali::with('mahasiswa')->first();
     return "{$wali->nama} adalah wali dari {$wali->mahasiswa->nama}";
 });
@@ -208,24 +197,20 @@ Route::resource('dosen', DosenController::class)->middleware('auth');
 //Hobi
 Route::resource('hobi', HobiController::class)->middleware('auth');
 
-
-
-
-
 Route::resource('kucing', KucingController::class);
 
-
-//CRUD One To Many 
+//CRUD One To Many
 Route::resource('mahasiswa', App\Http\Controllers\MahasiswaController::class);
 
 //CRUD Wali
 Route::resource('wali', App\Http\Controllers\WaliController::class);
 
-//CRUD Pelanggan
-Route::resource('pelanggan', App\Http\Controllers\PelangganController::class);
+Route::prefix('latihan')->group(function () {
+    Route::get('/transaksi/search', [TransaksiController::class, 'search'])->name('transaksi.search');
+    Route::resource('pelanggan', App\Http\Controllers\PelangganController::class);
+    Route::resource('prodak', App\Http\Controllers\ProdakController::class);
+    Route::resource('transaksi', App\Http\Controllers\TransaksiController::class);
+    Route::resource('pembayaran', App\Http\Controllers\PembayaranController::class);
 
-//CRUD Prodak
-Route::resource('prodak', App\Http\Controllers\ProdakController::class)->middleware('auth');
+})->middleware('auth');
 
-//CRUD Transaksi
-Route::resource('transaksi', App\Http\Controllers\TransaksiController::class)->middleware('auth');
