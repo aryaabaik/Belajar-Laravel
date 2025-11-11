@@ -43,10 +43,11 @@
             <div class="row produk-item mb-3">
                 <div class="col-md-5">
                     <label class="form-label">Produk</label>
-                    <select name="id_produk[]" class="form-select produk-select" required>
+                    <select name="id_prodak[]" class="form-select produk-select" required>
                         <option value="">-- Pilih Produk --</option>
                         @foreach ($prodak as $prod)
-                        <option value="{{ $prod->id }}" data-harga="{{ $prod->harga }}" {{ $prodTrans->id == $prod->id ? 'selected' : '' }}>
+                        <option value="{{ $prod->id }}" data-harga="{{ $prod->harga }}"
+                            {{ $prodTrans->id == $prod->id ? 'selected' : '' }}>
                             {{ $prod->nama_prodak }} - Rp{{ number_format($prod->harga, 0, ',', '.') }}
                         </option>
                         @endforeach
@@ -55,12 +56,14 @@
 
                 <div class="col-md-3">
                     <label class="form-label">Jumlah</label>
-                    <input type="number" name="jumlah[]" class="form-control jumlah-input" min="1" value="{{ $prodTrans->pivot->jumlah }}" required>
+                    <input type="number" name="jumlah[]" class="form-control jumlah-input" min="1"
+                        value="{{ $prodTrans->pivot->jumlah }}" required>
                 </div>
 
                 <div class="col-md-3">
                     <label class="form-label">Subtotal</label>
-                    <input type="text" class="form-control subtotal" readonly value="Rp{{ number_format($prodTrans->pivot->sub_total, 0, ',', '.') }}">
+                    <input type="text" class="form-control subtotal" readonly
+                        value="Rp{{ number_format($prodTrans->pivot->sub_total, 0, ',', '.') }}">
                 </div>
 
                 <div class="col-md-1 d-flex align-items-end">
@@ -93,7 +96,7 @@
             let jumlah = item.querySelector('.jumlah-input');
             let subtotalInput = item.querySelector('.subtotal');
 
-            let harga = select.selectedOptions[0] ? .getAttribute('data-harga') || 0;
+            let harga = select.selectedOptions[0]?.getAttribute('data-harga') || 0;
             let sub = parseInt(harga) * parseInt(jumlah.value || 0);
 
             subtotalInput.value = 'Rp' + sub.toLocaleString('id-ID');
@@ -130,6 +133,5 @@
     });
 
     document.addEventListener('DOMContentLoaded', hitungSubtotal);
-
 </script>
 @endsection

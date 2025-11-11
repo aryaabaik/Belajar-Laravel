@@ -41,11 +41,11 @@
                     <div class="row produk-item mb-3">
                         <div class="col-md-5">
                             <label class="form-label">Produk</label>
-                            <select name="id_produk[]" class="form-select produk-select" required>
+                            <select name="id_prodak[]" class="form-select produk-select" required>
                                 <option value="">-- Pilih Produk --</option>
                                 @foreach ($prodak as $prod)
                                 <option value="{{ $prod->id }}" data-harga="{{ $prod->harga }}">
-                                    {{ $prod->nama_produk }} - Rp{{ number_format($prod->harga, 0, ',', '.') }}
+                                    {{ $prod->nama_prodak }} - Rp{{ number_format($prod->harga, 0, ',', '.') }}
                                 </option>
                                 @endforeach
                             </select>

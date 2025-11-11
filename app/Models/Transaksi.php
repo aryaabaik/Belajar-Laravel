@@ -18,5 +18,8 @@ class Transaksi extends Model
             ->withPivot('jumlah', 'sub_total')
             ->withTimestamps();
     }
-
+    public function pembayaran()
+    {
+        return $this->hasOne(Pembayaran::class, 'id_transaksi');
+    }
 }

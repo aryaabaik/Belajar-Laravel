@@ -16,8 +16,9 @@
 
                 {{-- {{ notifikasi sukses }} --}}
                 @if(session('success'))
-                <div class="alert alert-success mt-2">
+                <div class="alert alert-success">
                     {{ session('success') }}
+                </div>
                 @endif
 
                 {{-- {{ notifikasi eror }} --}}
@@ -47,12 +48,12 @@
                             </thead>
                             <tbody>
                              
-                                @foreach ($transaksis as $no => $trx)
+                                @foreach ($transaksi as $no => $trx)
                                 <tr>
                                     <td>{{ $no + 1 }}</td>
                                     <td>{{ $trx->kode_transaksi }}</td>
                                     <td>{{ \Carbon\Carbon::parse($trx->tanggal)->format('d/m/Y') }}</td>
-                                    <td>{{ $trx->pelanggans->nama ?? '-' }}</td>
+                                    <td>{{ $trx->pelanggan->nama ?? '-' }}</td>
                                     <td>Rp.{{ number_format($trx->total_harga, 2, ',', '.') }}</td>
                                     <td>
                                        

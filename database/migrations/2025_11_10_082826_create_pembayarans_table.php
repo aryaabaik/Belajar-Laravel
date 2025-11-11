@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('transaksi_id')->constrained('transaksis');
+            $table->foreignId('id_transaksi')->constrained('transaksis');
             $table->date('tanggal_bayar');
             $table->enum('metode_pembayaran', ['cash', 'credit', 'debit']);
             $table->integer('jumlah_bayar');
@@ -22,7 +22,7 @@ return new class extends Migration
         });
     }
 
-    /**
+    /**DWDW dd
      * Reverse the migrations.
      */
     public function down(): void

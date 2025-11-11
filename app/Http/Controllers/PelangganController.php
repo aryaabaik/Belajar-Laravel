@@ -26,13 +26,13 @@ class PelangganController extends Controller
         $validated = $request->validate([
             'nama'       => 'required',
             'alamat'     => 'required',
-            'no_hp'      => 'required',
+            'no_telepon' => 'required',
         ]);
 
         $pelanggan             = new Pelanggan();
         $pelanggan->nama       = $request->nama;
         $pelanggan->alamat     = $request->alamat;
-        $pelanggan->no_hp      = $request->no_hp;
+        $pelanggan->no_telepon = $request->no_telepon;
         $pelanggan->save();
 
         return redirect()->route('pelanggan.index');
@@ -67,7 +67,7 @@ class PelangganController extends Controller
         $pelanggan             = Pelanggan::findOrFail($id);
         $pelanggan->nama       = $request->nama;
         $pelanggan->alamat     = $request->alamat;
-        $pelanggan->no_hp = $request->no_hp;
+        $pelanggan->no_telepon = $request->no_telepon;
         $pelanggan->save();
 
         return redirect()->route('pelanggan.index');
